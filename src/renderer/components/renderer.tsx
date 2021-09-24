@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {NodeViewContent, NodeViewWrapper} from '@tiptap/react'
+// @ts-ignore
 import mermaid from 'mermaid';
-console.log(mermaid);
 mermaid.initialize({ startOnLoad: false });
 
 export enum MODE {
@@ -15,10 +15,10 @@ export const Block = (props) => {
   const {attrs: {language: defaultLanguage, mode}, textContent} = node;
   const previewer = React.useRef(null);
   React.useEffect(() => {
-    if (mode === MODE.PREVIEW && previewer.current) {
+    if (mode === MODE.PREVIEW && previewer?.current) {
       // mermaid.render()
       try {
-        previewer.current.innerHTML = mermaid.render('content', textContent, () => {}, previewer.current);
+        (previewer.current as unknown as HTMLPreElement).innerHTML = mermaid.render('content', textContent, () => {}, previewer.current);
       } catch (e) {
         console.log(e);
       }
@@ -38,7 +38,7 @@ export const Block = (props) => {
       <option disabled>
         —
       </option>
-      {extension.options.lowlight.listLanguages().map((lang, index) => (
+      {extension.options.lowlight.listLanguages().map((lang: string, index: number) => (
         <option key={index} value={lang}>
           {lang}
         </option>

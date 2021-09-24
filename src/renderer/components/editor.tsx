@@ -12,7 +12,7 @@ import {CustomBlockExtension} from "./extension";
 // import javascript from 'highlight.js/lib/languages/javascript'
 // lowlight.registerLanguage('javascript', javascript)
 
-const MenuBar = ({ editor }) => {
+const MenuBar = ({ editor }: { editor: any }) => {
   if (!editor) {
     return null
   }
